@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "视频标记工具",
+  "version": "1.0",
+  "description": "在网页视频上添加时间点标记",
+  "permissions": ["storage", "tabs"],
+  "action": {
+    "default_popup": "popup.html"
+
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"]
+    }
+  ]
+
+} 

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>视频标记工具</title>
+  <style>
+    body {
+      width: 300px;
+      font-family: 'Microsoft YaHei', sans-serif;
+      padding: 15px;
+    }
+    
+    h1 {
+      font-size: 18px;
+      text-align: center;
+      margin-top: 0;
+      color: #2c3e50;
+    }
+    
+    .description {
+      font-size: 14px;
+      color: #7f8c8d;
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+    
+    .feature-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .feature-item {
+      padding: 8px 0;
+      border-bottom: 1px solid #ecf0f1;
+      display: flex;
+      align-items: center;
+    }
+    
+    .feature-item:last-child {
+      border-bottom: none;
+    }
+    
+    .feature-icon {
+      width: 24px;
+      height: 24px;
+      background-color: #3498db;
+      border-radius: 50%;
+      color: white;
+      text-align: center;
+      line-height: 24px;
+      margin-right: 10px;
+      font-weight: bold;
+    }
+    
+    .feature-text {
+      flex: 1;
+      font-size: 14px;
+    }
+    
+    .add-icon {
+      background-color: #2ecc71;
+    }
+    
+    .jump-icon {
+      background-color: #3498db;
+    }
+    
+    .delete-icon {
+      background-color: #e74c3c;
+    }
+    
+    .footer {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 12px;
+      color: #95a5a6;
+    }
+  </style>
+</head>
+<body>
+  <h1>视频标记工具</h1>
+  
+  <div class="description">
+    在任何视频网站上添加时间点标记，方便您稍后跳转回重要部分。
+  </div>
+  
+  <ul class="feature-list">
+    <li class="feature-item">
+      <div class="feature-icon add-icon">+</div>
+      <div class="feature-text">添加标记：在重要时刻添加带描述的标记点</div>
+    </li>
+    <li class="feature-item">
+      <div class="feature-icon jump-icon">↪</div>
+      <div class="feature-text">跳转标记：快速跳转到之前标记的时间点</div>
+    </li>
+    <li class="feature-item">
+      <div class="feature-icon delete-icon">×</div>
+      <div class="feature-text">删除标记：移除不需要的标记点</div>
+    </li>
+  </ul>
+  
+  <div class="footer">
+    提示：页面关闭后，标记信息会自动清除
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html> 

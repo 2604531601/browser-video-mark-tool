@@ -11,6 +11,30 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   padding: 10px;
   font-family: 'Microsoft YaHei', sans-serif;
+  pointer-events: auto;
+  will-change: transform;
+}
+
+/* 全屏模式下的悬浮窗样式 */
+:fullscreen .video-mark-tool-container,
+:-webkit-full-screen .video-mark-tool-container,
+:-moz-full-screen .video-mark-tool-container,
+:-ms-fullscreen .video-mark-tool-container {
+  position: absolute !important;
+  z-index: 2147483647 !important;
+  top: 20px !important;
+  right: 20px !important;
+}
+
+/* 确保悬浮窗在全屏元素中可见 */
+video:fullscreen .video-mark-tool-container,
+video:-webkit-full-screen .video-mark-tool-container,
+video:-moz-full-screen .video-mark-tool-container,
+video:-ms-fullscreen .video-mark-tool-container {
+  position: absolute !important;
+  z-index: 2147483647 !important;
+  top: 20px !important;
+  right: 20px !important;
 }
 
 /* 工具栏 */
@@ -73,8 +97,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10000;
+  z-index: 2147483647;
   font-family: 'Microsoft YaHei', sans-serif;
+}
+
+/* 全屏模式下的标记输入容器 */
+:fullscreen .video-mark-input-container,
+:-webkit-full-screen .video-mark-input-container,
+:-moz-full-screen .video-mark-input-container,
+:-ms-fullscreen .video-mark-input-container {
+  position: fixed !important;
+  z-index: 2147483647 !important;
 }
 
 /* 标记输入表单 */
@@ -86,6 +119,8 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+  position: relative;
+  z-index: 2147483647;
 }
 
 /* 标记列表容器 */

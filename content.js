@@ -79,6 +79,12 @@ function createMarkUI() {
   
   // 初始化数据
   initMarksData();
+
+  // 监听全屏状态变化
+  document.addEventListener('fullscreenchange', handleFullscreenChange);
+  document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+  document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+  document.addEventListener('MSFullscreenChange', handleFullscreenChange);
 }
 
 // 初始化标记数据
@@ -153,8 +159,19 @@ function handleAddMark() {
     // 保存标记
     saveMarksData();
     
-    // 关闭弹窗
-    document.body.removeChild(markInputContainer);
+    // 检查是否在全屏模式下
+    const isFullscreen = document.fullscreenElement || 
+                        document.webkitFullscreenElement || 
+                        document.mozFullScreenElement || 
+                        document.msFullscreenElement;
+    
+    if (isFullscreen) {
+      // 在全屏模式下，从全屏元素中移除弹窗
+      isFullscreen.removeChild(markInputContainer);
+    } else {
+      // 在普通模式下，从body中移除弹窗
+      document.body.removeChild(markInputContainer);
+    }
   });
   
   // 取消按钮
@@ -162,7 +179,20 @@ function handleAddMark() {
   cancelButton.className = 'mark-cancel-button';
   cancelButton.textContent = '取消';
   cancelButton.addEventListener('click', () => {
-    document.body.removeChild(markInputContainer);
+    // 检查是否在全屏模式下
+    const isFullscreen = document.fullscreenElement || 
+                        document.webkitFullscreenElement || 
+                        document.mozFullScreenElement || 
+                        document.msFullscreenElement;
+    
+    if (isFullscreen) {
+      // 在全屏模式下，从全屏元素中移除弹窗
+      isFullscreen.removeChild(markInputContainer);
+    } else {
+      // 在普通模式下，从body中移除弹窗
+      document.body.removeChild(markInputContainer);
+    }
+    
     // 继续播放视频
     currentVideoElement.play();
   });
@@ -179,7 +209,20 @@ function handleAddMark() {
   markInputForm.appendChild(buttonContainer);
   
   markInputContainer.appendChild(markInputForm);
-  document.body.appendChild(markInputContainer);
+  
+  // 检查是否在全屏模式下
+  const isFullscreen = document.fullscreenElement || 
+                      document.webkitFullscreenElement || 
+                      document.mozFullScreenElement || 
+                      document.msFullscreenElement;
+  
+  if (isFullscreen) {
+    // 在全屏模式下，将弹窗添加到全屏元素中
+    isFullscreen.appendChild(markInputContainer);
+  } else {
+    // 在普通模式下，将弹窗添加到body中
+    document.body.appendChild(markInputContainer);
+  }
   
   // 聚焦到标题输入框
   titleInput.focus();
@@ -217,8 +260,23 @@ function handleJumpMark() {
       currentVideoElement.currentTime = mark.time;
       currentVideoElement.play();
       
-      // 关闭弹窗
-      document.body.removeChild(markListContainer);
+      // 检查是否在全屏模式下
+      const isFullscreen = document.fullscreenElement || 
+                          document.webkitFullscreenElement || 
+                          document.mozFullScreenElement || 
+                          document.msFullscreenElement;
+      
+      if (isFullscreen) {
+        // 在全屏模式下，从全屏元素中移除弹窗
+        if (isFullscreen.contains(markListContainer)) {
+          isFullscreen.removeChild(markListContainer);
+        }
+      } else {
+        // 在普通模式下，从body中移除弹窗
+        if (document.body.contains(markListContainer)) {
+          document.body.removeChild(markListContainer);
+        }
+      }
     });
     
     marksList.appendChild(markItem);
@@ -229,7 +287,23 @@ function handleJumpMark() {
   cancelButton.className = 'mark-cancel-button';
   cancelButton.textContent = '取消';
   cancelButton.addEventListener('click', () => {
-    document.body.removeChild(markListContainer);
+    // 检查是否在全屏模式下
+    const isFullscreen = document.fullscreenElement || 
+                        document.webkitFullscreenElement || 
+                        document.mozFullScreenElement || 
+                        document.msFullscreenElement;
+    
+    if (isFullscreen) {
+      // 在全屏模式下，从全屏元素中移除弹窗
+      if (isFullscreen.contains(markListContainer)) {
+        isFullscreen.removeChild(markListContainer);
+      }
+    } else {
+      // 在普通模式下，从body中移除弹窗
+      if (document.body.contains(markListContainer)) {
+        document.body.removeChild(markListContainer);
+      }
+    }
   });
   
   // 添加所有元素
@@ -238,7 +312,20 @@ function handleJumpMark() {
   markListForm.appendChild(cancelButton);
   
   markListContainer.appendChild(markListForm);
-  document.body.appendChild(markListContainer);
+  
+  // 检查是否在全屏模式下
+  const isFullscreen = document.fullscreenElement || 
+                      document.webkitFullscreenElement || 
+                      document.mozFullScreenElement || 
+                      document.msFullscreenElement;
+  
+  if (isFullscreen) {
+    // 在全屏模式下，将弹窗添加到全屏元素中
+    isFullscreen.appendChild(markListContainer);
+  } else {
+    // 在普通模式下，将弹窗添加到body中
+    document.body.appendChild(markListContainer);
+  }
 }
 
 // 删除标记处理
@@ -283,7 +370,23 @@ function handleDeleteMark() {
       
       // 如果没有标记了，关闭弹窗
       if (marks.length === 0) {
-        document.body.removeChild(markListContainer);
+        // 检查是否在全屏模式下
+        const isFullscreen = document.fullscreenElement || 
+                            document.webkitFullscreenElement || 
+                            document.mozFullScreenElement || 
+                            document.msFullscreenElement;
+        
+        if (isFullscreen) {
+          // 在全屏模式下，从全屏元素中移除弹窗
+          if (isFullscreen.contains(markListContainer)) {
+            isFullscreen.removeChild(markListContainer);
+          }
+        } else {
+          // 在普通模式下，从body中移除弹窗
+          if (document.body.contains(markListContainer)) {
+            document.body.removeChild(markListContainer);
+          }
+        }
       }
     });
     
@@ -295,7 +398,23 @@ function handleDeleteMark() {
   cancelButton.className = 'mark-cancel-button';
   cancelButton.textContent = '取消';
   cancelButton.addEventListener('click', () => {
-    document.body.removeChild(markListContainer);
+    // 检查是否在全屏模式下
+    const isFullscreen = document.fullscreenElement || 
+                        document.webkitFullscreenElement || 
+                        document.mozFullScreenElement || 
+                        document.msFullscreenElement;
+    
+    if (isFullscreen) {
+      // 在全屏模式下，从全屏元素中移除弹窗
+      if (isFullscreen.contains(markListContainer)) {
+        isFullscreen.removeChild(markListContainer);
+      }
+    } else {
+      // 在普通模式下，从body中移除弹窗
+      if (document.body.contains(markListContainer)) {
+        document.body.removeChild(markListContainer);
+      }
+    }
   });
   
   // 添加所有元素
@@ -304,7 +423,20 @@ function handleDeleteMark() {
   markListForm.appendChild(cancelButton);
   
   markListContainer.appendChild(markListForm);
-  document.body.appendChild(markListContainer);
+  
+  // 检查是否在全屏模式下
+  const isFullscreen = document.fullscreenElement || 
+                      document.webkitFullscreenElement || 
+                      document.mozFullScreenElement || 
+                      document.msFullscreenElement;
+  
+  if (isFullscreen) {
+    // 在全屏模式下，将弹窗添加到全屏元素中
+    isFullscreen.appendChild(markListContainer);
+  } else {
+    // 在普通模式下，将弹窗添加到body中
+    document.body.appendChild(markListContainer);
+  }
 }
 
 // 格式化时间
@@ -341,4 +473,51 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
   
   return false;
-}); 
+});
+
+// 处理全屏状态变化
+function handleFullscreenChange() {
+  const isFullscreen = document.fullscreenElement || 
+                      document.webkitFullscreenElement || 
+                      document.mozFullScreenElement || 
+                      document.msFullscreenElement;
+  
+  const markToolContainer = document.querySelector('.video-mark-tool-container');
+  if (markToolContainer) {
+    if (isFullscreen) {
+      // 全屏时，将悬浮窗移动到全屏元素中
+      const fullscreenElement = document.fullscreenElement || 
+                              document.webkitFullscreenElement || 
+                              document.mozFullScreenElement || 
+                              document.msFullscreenElement;
+      
+      if (fullscreenElement) {
+        // 从body中移除悬浮窗
+        document.body.removeChild(markToolContainer);
+        // 添加到全屏元素中
+        fullscreenElement.appendChild(markToolContainer);
+        // 调整样式
+        markToolContainer.style.position = 'absolute';
+        markToolContainer.style.zIndex = '2147483647';
+        markToolContainer.style.top = '20px';
+        markToolContainer.style.right = '20px';
+      }
+    } else {
+      // 退出全屏时，将悬浮窗移回body
+      const fullscreenElement = document.fullscreenElement || 
+                              document.webkitFullscreenElement || 
+                              document.mozFullScreenElement || 
+                              document.msFullscreenElement;
+      
+      if (fullscreenElement && fullscreenElement.contains(markToolContainer)) {
+        fullscreenElement.removeChild(markToolContainer);
+        document.body.appendChild(markToolContainer);
+        // 恢复默认样式
+        markToolContainer.style.position = 'fixed';
+        markToolContainer.style.zIndex = '9999';
+        markToolContainer.style.top = '20px';
+        markToolContainer.style.right = '20px';
+      }
+    }
+  }
+} 
